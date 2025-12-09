@@ -1,0 +1,7 @@
+-- Define work location
+define work ./work
+
+-- The ieee library will be redefined
+-- Source the cds.lib from the latest rtl dir
+undefine ieee
+SOFTINCLUDE ../hdl/cds.lib

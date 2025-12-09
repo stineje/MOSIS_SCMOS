@@ -1,0 +1,38 @@
+Thu Dec 19 10:57:42 2002
+visadev: *F,DLPAKC: Packed library for deslib is corrupt, please remove ./rtllib/des/inca.linux.138.pak (1 at Thu Dec 19 10:57:42 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for dmalib is corrupt, please remove ./rtllib/dma/inca.linux.138.pak (1 at Thu Dec 19 10:57:42 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for dsplib is corrupt, please remove ./rtllib/dsp/inca.linux.138.pak (1 at Thu Dec 19 10:57:43 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for hddlib is corrupt, please remove ./rtllib/hdd/inca.linux.138.pak (1 at Thu Dec 19 10:57:43 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLNOLK: Failed to get a shared lock on library 'leonlib' (Resource temporarily unavailable).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for maclib is corrupt, please remove ./rtllib/mac/inca.linux.138.pak (1 at Thu Dec 19 10:57:43 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for toplib is corrupt, please remove ./rtllib/top/inca.linux.138.pak (1 at Thu Dec 19 10:57:43 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for usblib is corrupt, please remove ./rtllib/usb/inca.linux.138.pak (1 at Thu Dec 19 10:57:43 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLPAKC: Packed library for vgalib is corrupt, please remove ./rtllib/vga/inca.linux.138.pak (1 at Thu Dec 19 10:57:43 2002
+).
+
+Thu Dec 19 10:57:43 2002
+visadev: *F,DLNOLK: Failed to get a shared lock on library 'leonlib' (Resource temporarily unavailable).
+

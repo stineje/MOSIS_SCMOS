@@ -1,0 +1,113 @@
+Quick Start to SOCks
+~~~~~~~~~~~~~~~~~~~~
+
+This is a SoC, containing a Sparc compatible Leon CPU,
+an AMBA SoC bus and a module of custom logic. You can 
+add whatever custom logic you want. You can program
+the CPU in C/C++. You can simulate your program with
+the Cadence NC-Sim simulator. Scripts for all these
+steps are included.
+
+
+How to compile the HDL code
+---------------------------
+1) ./exe/socks_clean
+2) cd hdl
+3) ../exe/socks_compile
+
+
+How to COMPILE the Bubblesort demo
+---------------------------
+1) cd ./firmware/bubblesort
+2) make clean
+3) make
+
+
+How to RUN the Bubblesort demo
+---------------------------
+1) cd ./sim
+2) ../exe/socks_sim bubblesort
+
+
+How to COMPILE the Cubing demo
+---------------------------
+1) cd ./firmware/cube
+2) make clean
+3) make
+
+
+How to RUN the Cubing demo
+---------------------------
+1) cd ./sim
+2) ../exe/socks_sim cube
+3) cat INT.OUTPUT
+
+
+How to get WAVEFORMS
+---------------------------
+1) waveforms only for custom logic:
+   ../exe/socks_sim cube partial
+2) waveforms for the entire chip:
+   ../exe/socks_sim cube full
+3) no waveforms
+   ../exe/socks_sim cube
+
+Note: Adding waveforms for the entire
+chip (full) requires 10MB and slows
+down the simulation quite a bit.
+
+To view the waveforms, use "simvision".
+
+
+How do I develop my own HDL code
+---------------------------
+1) cd ./hdl/custom
+2) Mofify custom_top.v as beeded
+3) cd ..
+4) ../exe/socks_compile
+
+
+How do I write my own C program?
+---------------------------
+1) cd ./firmware
+2) cp -r cube myprog
+3) Modify leon_test.c as needed
+4) make
+
+
+How do I simulat my own program/hdl combo?
+---------------------------
+1) Compile HDL and C code
+2) cd ./sim
+3) ../exe/socks_sim myprog
+
+
+How can I input/output data in my program?
+---------------------------
+1) print_scr(char): Prints a character on the terminal
+2) print_txt(char): Prints a character into TXT.OUTPUT
+3) print_int(int):  Prints a integer into INT.OUTPUT
+4) To input data, add it is an arrary of constants to your code
+
+
+How can I "exit" my program?
+---------------------------
+Use the exit_sim() function
+
+
+How do these print_() functions work?
+---------------------------
+The Leon has a 32-bit external memory bus. The lower half
+of the address range access RAM, the upper half IO. The
+testbench has a module that waits for valid IO accesses.
+If a valid address is detected, this happens:
+Address  0: Print LSB on screen
+Address  4: Send LSB to TXT.OUTPUT
+Address  8: Send 32-bit unsigned integer to INT.OUTPUT
+Address 12: Cause a simulator exception to exit simulation
+
+
+
+----------------
+Johannes
+jgrad@ece.iit.edu

@@ -1,0 +1,7 @@
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- enable with nc vhdl
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INCLUDE $LDV/tools/inca/files/hdl.var
+
+-- Define the work directory
+DEFINE WORK work

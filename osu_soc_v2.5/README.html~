@@ -1,0 +1,56 @@
+<HTML>
+<BODY>
+<script type="text/javascript">
+<!--
+	document.write('<img src="http://vlsi.ece.iit.edu/axs/ax.cgi?mode=img&ref=');
+	document.write( escape( document.referrer ) );
+	document.write('" height="1" width="1" style="display:none" alt="" />');
+// -->
+</script><noscript>
+	<img src="http://vlsi.ece.iit.edu/axs/ax.cgi?mode=img" height="1" width="1" style="display:none" alt="" />
+</noscript>
+<H3>FreePDK: Unleashing VLSI to the Masses</H3>
+<H4>System-on-Chip Designs for SCMOS MOSIS 
+AMI 0.6um, AMI 0.35um, TSMC 0.25um, and TSMC 0.18um</H4>
+<HR align=left noshade width=850>
+<BR>
+Welcome to System on Chip (SoC) Design Flows 
+at Oklahoma State University
+for AMI 0.6um, AMI 0.35um, TSMC 0.25um, TSMC 0.18um brought to you 
+by the 
+<a href="http://vcag.ecen.okstate.edu" target="_blank">VLSI Computer
+Architecture Research Group</a>
+group at 
+the Oklahoma State University!  <BR> 
+<BR>
+<BR>
+<p>Release Notes
+<ul>
+<li>There might be 
+a <B>BUG</B> in this ascii file which can easily be corrected:
+/import/cad2/osu_stdcells/flow/ami05/encounter.conf
+<br>The line
+<br><tt>set rda_Input(ui_leffile) "$OSUcells/ami05/lib/osu05_stdcells.lef"</tt>
+<br>has to be corrected to
+<br><tt>set rda_Input(ui_leffile)
+"$OSUcells/lib/ami05/lib/osu05_stdcells.lef"</tt>
+</ul>
+
+<B>Please note that AMI 0.5um is only available right now for v2.5
+flow.  TSMC is currently being updated and will be placed in a new
+version no later than 6/30/07.</B>
+
+<p>New for Version 2.5
+<ul>
+<li>Library: Complete Synopsys and Cadence flow
+<li>Flow: Allows macro routing for custom/standard-cell design and pad
+insertion
+<li>Reference Designs: basically unchanged
+</ul>
+
+All bugs, comments, questions, or any criticisms are highly encouraged.
+Please contact James Stine at <a href="mailto:james.stine@okstate.edu">
+james.stine@okstate.edu</a> to contribute to the cause.
+
+
+

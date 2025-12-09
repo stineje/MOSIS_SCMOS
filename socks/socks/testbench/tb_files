@@ -1,0 +1,5 @@
+# The testbench files to be compiled by the socks_sim script
+KS_top_msg.vhd
+KS_top_iram.vhd
+KS_top_tb.vhd
+KS_top_config.vhd

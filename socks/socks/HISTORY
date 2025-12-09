@@ -1,0 +1,35 @@
+SOCks is a Leon based SOC
+
+V4: 11/20/04
+Fixed bug in testbench (thanks to Bryan Peterson)
+Added slide documentation
+Added cshrc template file
+
+
+V3: 8/20/04
+Simplied AMBA interface
+Added Cubing unit as demo custom logic
+Added testbench monitor on data bus
+Added partial waveform grabbing
+Fixed Databus enable signal
+Implemented cubing demo program
+Fixed Bubblesort algorithm
+
+
+V2: 8/11/04
+Added custom AMBA logic
+Removed all HDD references
+Simulation links ram.dat directly from firmware
+Removed vhdl and vlog folder
+Removed design folder
+Removed KS_Code module
+Implemented Bubblesort demo program
+
+
+V1: 8/9/04
+First release
+Taken from Turbo Eagle
+Removed all blocks but the HDD
+Broken down Firmware to the minimum
+Created custom scripts in ./exe
+HDD testbench runs successful

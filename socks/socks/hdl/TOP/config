@@ -1,0 +1,35 @@
+LIBRARY toplib;
+LIBRARY leonlib;
+LIBRARY customlib;
+
+configuration auto_gen of Asic_Entity is
+
+  use toplib.all;
+  use leonlib.all;
+  use customlib.all;
+
+  for Asic_Architecture
+    for all: PadRing_Entity
+       use entity toplib.PadRing_Entity(PadRing_Architecture);
+       for PadRing_Entity
+          for all: PDUDGZ
+             use entity toplib.PDUDGZ(rtl);
+          end for;
+          for all: PDO08CDG
+             use entity toplib.PDO08CDG(rtl);
+          end for;
+          for all: PCI66DGZ
+             use entity toplib.PCI66DGZ(rtl);
+          end for;
+       end for;
+    end for;
+    for all: Core_Entity
+       use entity toplib.Core_Entity(Core_Architecture);
+       for Core_Architecture
+               for all: leon
+                  use configuration leonlib.cfg_LEON_RTL;
+               end for;
+       end for;
+    end for;
+  end for;
+end auto_gen;

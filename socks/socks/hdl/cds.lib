@@ -1,0 +1,7 @@
+SOFTINCLUDE $LDV/tools/inca/files/cds.lib
+
+define leonlib 		./rtllib/leon
+define ramlib 		./rtllib/ram
+define customlib  	./rtllib/custom
+define toplib  		./rtllib/top
+

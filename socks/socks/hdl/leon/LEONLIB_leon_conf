@@ -1,0 +1,319 @@
+--
+-- Configuration for library LEONLIB
+-- Configuration Model: HIERARCHICAL
+--
+
+library LEONLIB;
+configuration cfg_RSTGEN_RTL of RSTGEN is
+    for RTL
+    end for;
+end cfg_RSTGEN_RTL;
+
+library LEONLIB;
+configuration cfg_CLK_BUF_RTL of CLK_BUF is
+    for RTL
+    end for;
+end cfg_CLK_BUF_RTL;
+
+library LEONLIB;
+configuration cfg_CLKGEN_RTL of CLKGEN is
+    for RTL
+      for CLKBUF0: CLK_BUF use configuration LEONLIB.cfg_CLK_BUF_RTL;
+      end for;
+      for CLKBUF1: CLK_BUF use configuration LEONLIB.cfg_CLK_BUF_RTL;
+      end for;
+    end for;
+end cfg_CLKGEN_RTL;
+
+library LEONLIB;
+configuration cfg_AHBARB_RTL of AHBARB is
+    for RTL
+    end for;
+end cfg_AHBARB_RTL;
+
+library LEONLIB;
+configuration cfg_APBMST_RTL of APBMST is
+    for RTL
+    end for;
+end cfg_APBMST_RTL;
+
+library LEONLIB;
+configuration cfg_ACACHE_RTL of ACACHE is
+    for RTL
+    end for;
+end cfg_ACACHE_RTL;
+
+library LEONLIB;
+configuration cfg_MCTRL_RTL of MCTRL is
+    for RTL
+    end for;
+end cfg_MCTRL_RTL;
+
+library LEONLIB;
+configuration cfg_WPROT_RTL of WPROT is
+    for RTL
+      for WPREGGEN
+      end for;
+    end for;
+end cfg_WPROT_RTL;
+
+library LEONLIB;
+configuration cfg_AHBSTAT_RTL of AHBSTAT is
+    for RTL
+    end for;
+end cfg_AHBSTAT_RTL;
+
+library LEONLIB;
+configuration cfg_LCONF_RTL of LCONF is
+    for RTL
+    end for;
+end cfg_LCONF_RTL;
+
+library LEONLIB;
+configuration cfg_TIMERS_RTL of TIMERS is
+    for RTL
+      for WD
+      end for;
+    end for;
+end cfg_TIMERS_RTL;
+
+library LEONLIB;
+configuration cfg_UART_RTL of UART is
+    for RTL
+    end for;
+end cfg_UART_RTL;
+
+library LEONLIB;
+configuration cfg_IRQCTRL_RTL of IRQCTRL is
+    for RTL
+    end for;
+end cfg_IRQCTRL_RTL;
+
+library LEONLIB;
+configuration cfg_IOPORT_RTL of IOPORT is
+    for RTL
+    end for;
+end cfg_IOPORT_RTL;
+
+library LEONLIB;
+configuration cfg_MCORE_RTL of MCORE is
+    for RTL
+      for RESET0: RSTGEN use configuration LEONLIB.cfg_RSTGEN_RTL;
+      end for;
+      for CLKGEN0: CLKGEN use configuration LEONLIB.cfg_CLKGEN_RTL;
+      end for;
+      for AHB0: AHBARB use configuration LEONLIB.cfg_AHBARB_RTL;
+      end for;
+      for APB0: APBMST use configuration LEONLIB.cfg_APBMST_RTL;
+      end for;
+      for A0: ACACHE use configuration LEONLIB.cfg_ACACHE_RTL;
+      end for;
+      for MCTRL0: MCTRL use configuration LEONLIB.cfg_MCTRL_RTL;
+      end for;
+      for WP0
+        for WPM: WPROT use configuration LEONLIB.cfg_WPROT_RTL;
+        end for;
+      end for;
+      for AS0
+        for ASM: AHBSTAT use configuration LEONLIB.cfg_AHBSTAT_RTL;
+        end for;
+      end for;
+      for PR0
+      end for;
+      for AHBDRV(0)
+      end for;
+      for AHBDRV(1)
+      end for;
+      for AHBDRV(2)
+      end for;
+      for AHBDRV(3)
+      end for;
+      for AHBDRV(4)
+      end for;
+      for LC0
+        for LCM: LCONF use configuration LEONLIB.cfg_LCONF_RTL;
+        end for;
+      end for;
+      for TIMERS0: TIMERS use configuration LEONLIB.cfg_TIMERS_RTL;
+      end for;
+      for UART1: UART use configuration LEONLIB.cfg_UART_RTL;
+      end for;
+      for UART2: UART use configuration LEONLIB.cfg_UART_RTL;
+      end for;
+      for IRQCTRL0: IRQCTRL use configuration LEONLIB.cfg_IRQCTRL_RTL;
+      end for;
+      for IOPORT0: IOPORT use configuration LEONLIB.cfg_IOPORT_RTL;
+      end for;
+      for APBDRV(0)
+      end for;
+      for APBDRV(1)
+      end for;
+      for APBDRV(2)
+      end for;
+      for APBDRV(3)
+      end for;
+      for APBDRV(4)
+      end for;
+      for APBDRV(5)
+      end for;
+      for APBDRV(6)
+      end for;
+      for APBDRV(7)
+      end for;
+      for APBDRV(8)
+      end for;
+      for APBDRV(9)
+      end for;
+      for APBDRV(10)
+        for U0
+        end for;
+      end for;
+      for APBDRV(11)
+        for U0
+        end for;
+      end for;
+      for APBDRV(12)
+        for U0
+        end for;
+      end for;
+      for APBDRV(13)
+        for U0
+        end for;
+      end for;
+      for APBDRV(14)
+        for U0
+        end for;
+      end for;
+      for APBDRV(15)
+        for U0
+        end for;
+      end for;
+    end for;
+end cfg_MCORE_RTL;
+
+library LEONLIB;
+configuration cfg_IU_RTL of IU is
+    for RTL
+      for IR1
+      end for;
+      for FG5
+      end for;
+      for DEBUG0
+      end for;
+    end for;
+end cfg_IU_RTL;
+
+library LEONLIB;
+configuration cfg_RFBYPASS_RTL of RFBYPASS is
+    for RTL
+    end for;
+end cfg_RFBYPASS_RTL;
+
+library LEONLIB;
+configuration cfg_GSCL_REGFILE_RTL of GSCL_REGFILE is
+    for RTL
+      for DP136X32
+      end for;
+      for WB: RFBYPASS use configuration LEONLIB.cfg_RFBYPASS_RTL;
+      end for;
+    end for;
+end cfg_GSCL_REGFILE_RTL;
+
+library LEONLIB;
+configuration cfg_REGFILE_IU_RTL of REGFILE_IU is
+    for RTL
+      for NINF
+        for GSCL0
+          for U0: GSCL_REGFILE use configuration LEONLIB.cfg_GSCL_REGFILE_RTL;
+          end for;
+        end for;
+      end for;
+    end for;
+end cfg_REGFILE_IU_RTL;
+
+library LEONLIB;
+configuration cfg_ICACHE_RTL of ICACHE is
+    for RTL
+    end for;
+end cfg_ICACHE_RTL;
+
+library LEONLIB;
+configuration cfg_DCACHE_RTL of DCACHE is
+    for RTL
+    end for;
+end cfg_DCACHE_RTL;
+
+library LEONLIB;
+configuration cfg_CACHE_RTL of CACHE is
+    for RTL
+      for ICACHE0: ICACHE use configuration LEONLIB.cfg_ICACHE_RTL;
+      end for;
+      for DCACHE0: DCACHE use configuration LEONLIB.cfg_DCACHE_RTL;
+      end for;
+    end for;
+end cfg_CACHE_RTL;
+
+library LEONLIB;
+configuration cfg_GSCL_SYNCRAM_RTL of GSCL_SYNCRAM is
+    for RTL
+      for A8D26
+      end for;
+    end for;
+end cfg_GSCL_SYNCRAM_RTL;
+
+library LEONLIB;
+configuration cfg_SYNCRAM_BEHAV of SYNCRAM is
+    for BEHAV
+      for HB
+        for GSCL0
+          for U0: GSCL_SYNCRAM use configuration LEONLIB.cfg_GSCL_SYNCRAM_RTL;
+          end for;
+        end for;
+      end for;
+    end for;
+end cfg_SYNCRAM_BEHAV;
+
+library LEONLIB;
+configuration cfg_CACHEMEM_RTL of CACHEMEM is
+    for RTL
+      for ITAGS0: SYNCRAM use configuration LEONLIB.cfg_SYNCRAM_BEHAV;
+      end for;
+      for DTAGS0
+        for DTAGS0: SYNCRAM use configuration LEONLIB.cfg_SYNCRAM_BEHAV;
+        end for;
+      end for;
+      for IDATA0: SYNCRAM use configuration LEONLIB.cfg_SYNCRAM_BEHAV;
+      end for;
+      for DDATA0: SYNCRAM use configuration LEONLIB.cfg_SYNCRAM_BEHAV;
+      end for;
+    end for;
+end cfg_CACHEMEM_RTL;
+
+library LEONLIB;
+configuration cfg_PROC_RTL of PROC is
+    for RTL
+      for IU0: IU use configuration LEONLIB.cfg_IU_RTL;
+      end for;
+      for RF0: REGFILE_IU use configuration LEONLIB.cfg_REGFILE_IU_RTL;
+      end for;
+      for C0: CACHE use configuration LEONLIB.cfg_CACHE_RTL;
+      end for;
+      for CMEM0: CACHEMEM use configuration LEONLIB.cfg_CACHEMEM_RTL;
+      end for;
+      for NOFPC
+      end for;
+      for NOCP
+      end for;
+    end for;
+end cfg_PROC_RTL;
+
+library LEONLIB;
+configuration cfg_LEON_RTL of LEON is
+    for RTL
+      for MCORE0: MCORE use configuration LEONLIB.cfg_MCORE_RTL;
+      end for;
+      for PROC0: PROC use configuration LEONLIB.cfg_PROC_RTL;
+      end for;
+    end for;
+end cfg_LEON_RTL;
+

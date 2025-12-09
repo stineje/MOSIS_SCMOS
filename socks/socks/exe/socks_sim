@@ -1,0 +1,157 @@
+#! /bin/sh
+
+# testbench file directories
+TESTBENCH_DIR="../testbench"
+INC_DIR="../include"
+DAT_DIR="../firmware"
+TCL_DIR="$TESTBENCH_DIR/Tcl"
+OPCODE_DIR="./tsource"
+WORK_DIR="./work"
+
+# Process the command line args
+if [ "$#" -lt 1 ]
+then
+   echo "Use: socks_sim program [full | partial]"
+   exit
+else
+   # Save the simulation name
+   SIM=$1
+
+   # Process the probes arg
+   if [ "$#" -gt 1 ]
+   then
+      if [ $2 = "full" ]
+      then
+         PROBE="_full"
+      elif [ $2 = "partial" ] 
+      then
+	 PROBE="_partial"
+      else
+         echo "Use either full or partial"
+	 exit 127
+      fi
+   fi
+
+   # The tcl script creates waveform files and finishes the sim
+   TCL_SCRIPT="socks$PROBE.tcl"
+fi
+
+# Create the work directory if needed
+if [ -d $WORK_DIR ]
+then
+   /usr/bin/rm -rf $WORK_DIR
+fi
+ mkdir $WORK_DIR
+
+# link in the cds.lib and hdl.var when not found locally
+if [ ! -r ./cds.lib ]
+then
+   if [ -r $TESTBENCH_DIR/cds.lib ]
+   then
+      ln -s $TESTBENCH_DIR/cds.lib .
+   else
+      echo "Could not find file : $TESTBENCH_DIR/cds.lib"
+      exit
+   fi
+fi
+
+if [ ! -r ./hdl.var ]
+then
+   if [ -r $TESTBENCH_DIR/hdl.var ]
+   then
+      ln -s $TESTBENCH_DIR/hdl.var .
+   else
+      echo "Could not find file : $TESTBENCH_DIR/hdl.var"
+      exit
+   fi
+fi
+
+if [ -r ./TXT.OUTPUT ]
+then
+  /usr/bin/rm -rf TXT.OUTPUT
+fi
+
+if [ -r ./INT.OUTPUT ]
+then
+  /usr/bin/rm -rf INT.OUTPUT
+fi
+
+# Move the old TCL file and link in the correct tcl file
+if [ -r ./KS_top_tb.tcl ]
+then
+  /usr/bin/rm -rf "KS_top_tb.tcl"
+fi
+ln -s $TCL_DIR/$TCL_SCRIPT KS_top_tb.tcl
+
+# Create the opcode directory if it doesn't exist
+if [ -d $OPCODE_DIR ]
+then
+  /usr/bin/rm -rf $OPCODE_DIR
+fi   
+mkdir $OPCODE_DIR
+
+
+# Move old opcode files and link in the new opcode files
+if [ -r "$OPCODE_DIR/rom.dat" ]
+then
+    \mv -f "$OPCODE_DIR/rom.dat" "$OPCODE_DIR/rom.dat_last"
+fi
+
+if [ -r  "$OPCODE_DIR/ram.dat" ]
+then
+    \mv -f "$OPCODE_DIR/ram.dat" "$OPCODE_DIR/ram.dat_last"
+fi
+
+if [ -r $DAT_DIR/$SIM/rom.dat ]
+then
+   ln -s ../$DAT_DIR/$SIM/rom.dat $OPCODE_DIR/rom.dat
+else
+   echo "Could not find file : $DAT_DIR/$SIM/rom.dat"
+   exit
+fi
+
+if [ -r $DAT_DIR/$SIM/ram.dat ]
+then
+   ln -s ../$DAT_DIR/$SIM/ram.dat $OPCODE_DIR/ram.dat
+else
+   echo "Could not find file : $DAT_DIR/$SIM/ram.dat"
+   exit
+fi
+
+# If no testbench file list found then link in the default
+if [ ! -r ./tb_files ]
+then
+   if [ -r $TESTBENCH_DIR/tb_files ]
+   then
+      ln -s $TESTBENCH_DIR/tb_files ./tb_files
+   else
+      echo "Could not find file : $TESTBENCH_DIR/tb_files"
+      exit
+   fi
+fi
+
+# Compile the testbench files into work
+for name in `grep -v '^#' ./tb_files | grep -v '^$'`
+do
+   case $name in
+   *.vhd)
+      echo "************* compiling $TESTBENCH_DIR/$name"
+      ncvhdl -work work $TESTBENCH_DIR/$name
+      wait $!
+   ;;
+   esac
+   case $name in
+   *.v)
+      echo "************* compiling $TESTBENCH_DIR/$name"
+      ncvlog -work work -incdir $INC_DIR $TESTBENCH_DIR/$name
+      wait $!
+   ;;
+  esac
+done
+
+# Elaborate the testbench config
+ncelab -NOTimingchecks -access +r  KS_top_tb_config
+
+# Simulate
+ncsim KS_top_tb_config -tcl -input KS_top_tb.tcl
+

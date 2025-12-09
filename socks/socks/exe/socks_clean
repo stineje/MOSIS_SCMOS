@@ -1,0 +1,23 @@
+#!/bin/csh -f
+
+# Clean Compile data
+
+/usr/bin/rm -rf ./hdl/*.log*
+
+set list = `ls -1 ./hdl/rtllib`
+foreach i ( $list )
+    set cont = `ls ./hdl/rtllib/$i`
+    if ( "$cont" != "") then
+	/usr/bin/rm -rf ./hdl/rtllib/$i/*
+    endif
+end
+
+# Clean Simulation data
+
+set list = `ls -1 ./sim | grep -v "gold"`
+if ( "$list" != "" ) then
+    foreach i ( $list )
+	/usr/bin/rm -rf ./sim/$i
+    end
+endif
+

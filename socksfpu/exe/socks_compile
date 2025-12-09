@@ -1,0 +1,73 @@
+#!/bin/csh -f
+#
+
+/usr/bin/rm -rf rtllib/custom/*
+/usr/bin/rm -rf rtllib/top/*
+/usr/bin/rm -rf rtllib/leon/*
+/usr/bin/rm -rf rtllib/ram/*
+
+echo "Compiling RAMs..."
+ncvlog -work ramlib ./RAM/RAM*.v
+
+echo "Compiling Leon..."
+ncvhdl -work leonlib ./leon/amba.vhd
+ncvhdl -work leonlib ./leon/target.vhd
+ncvhdl -work leonlib ./leon/device.vhd
+ncvhdl -work leonlib ./leon/config.vhd 
+ncvhdl -work leonlib ./leon/sparcv8.vhd
+ncvhdl -work leonlib ./leon/iface.vhd
+ncvhdl -work leonlib ./leon/macro.vhd
+ncvhdl -work leonlib ./leon/debug.vhd
+ncvhdl -work leonlib ./leon/ambacomp.vhd
+ncvhdl -work leonlib ./leon/multlib.vhd
+ncvhdl -work leonlib ./leon/tech_generic.vhd
+ncvhdl -work leonlib ./leon/tech_tsmc.vhd
+ncvhdl -work leonlib ./leon/tech_gscl.vhd
+ncvhdl -work leonlib ./leon/tech_map.vhd
+ncvhdl -work leonlib ./leon/fpulib.vhd
+ncvhdl -work leonlib ./leon/clkgen.vhd
+ncvhdl -work leonlib ./leon/rstgen.vhd
+ncvhdl -work leonlib ./leon/iu.vhd
+ncvhdl -work leonlib ./leon/icache.vhd
+ncvhdl -work leonlib ./leon/dcache.vhd
+ncvhdl -work leonlib ./leon/cachemem.vhd
+ncvhdl -work leonlib ./leon/acache.vhd
+ncvhdl -work leonlib ./leon/cache.vhd
+ncvhdl -work leonlib ./leon/proc.vhd
+ncvhdl -work leonlib ./leon/apbmst.vhd
+ncvhdl -work leonlib ./leon/ahbarb.vhd
+ncvhdl -work leonlib ./leon/lconf.vhd 
+ncvhdl -work leonlib ./leon/wprot.vhd
+ncvhdl -work leonlib ./leon/ahbstat.vhd
+ncvhdl -work leonlib ./leon/timers.vhd
+ncvhdl -work leonlib ./leon/irqctrl.vhd
+ncvhdl -work leonlib ./leon/uart.vhd
+ncvhdl -work leonlib ./leon/ioport.vhd
+ncvhdl -work leonlib ./leon/mctrl.vhd
+ncvhdl -work leonlib ./leon/mcore.vhd
+ncvhdl -work leonlib ./leon/leon.vhd
+ncelab -work leonlib -conffile leon_conf leonlib.leon:rtl
+mv LEONLIB_leon_conf ./leon/LEONLIB_leon_conf
+ncvhdl -work leonlib ./leon/LEONLIB_leon_conf
+ncelab cfg_LEON_RTL
+
+echo "Compiling Custom..."
+ncvlog -work customlib ./custom/*.v
+ncvhdl -v93 -work customlib ./custom/*.vhd
+
+if ($status) then
+    echo "Error occured in custom code"
+    exit
+endif
+
+
+echo "Compiling Toplevel..."
+ncvhdl -work toplib ./TOP/pads.vhd
+ncvhdl -work toplib ./TOP/probes.vhd
+
+ncvhdl -work toplib ./TOP/trial_Core.vhd
+ncvhdl -work toplib ./TOP/trial_PadRing.vhd
+ncvhdl -work toplib ./TOP/trial_Asic.vhd
+
+ncvhdl -work toplib ./TOP/config
+ncelab auto_gen
